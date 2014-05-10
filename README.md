@@ -13,10 +13,10 @@ import (
 
 func main() {
 	client := &twitterstream.Client{
-		ConsumerKey:     consumerKey,
-		ConsumerSecret:  consumerSecret,
-		Token:           token,
-		TokenSecret:     tokenSecret,
+		ConsumerKey:     "...",
+		ConsumerSecret:  "...",
+		Token:           "...",
+		TokenSecret:     "...",
 		GzipCompression: true,
 	}
 
