@@ -25,18 +25,6 @@ type Connection struct {
 	consumer *oauth.Consumer
 }
 
-func NewClient(ConsumerKey, ConsumerSecret, Token, TokenSecret string) *Client {
-	c := &Client{
-		ConsumerKey:     ConsumerKey,
-		ConsumerSecret:  ConsumerSecret,
-		Token:           Token,
-		TokenSecret:     TokenSecret,
-		GzipCompression: false,
-	}
-
-	return c
-}
-
 func (c *Client) Filter(method string, userParams map[string]string) (*Connection, error) {
 	return c.Do(method, "https://stream.twitter.com/1.1/statuses/filter.json", userParams)
 }
@@ -98,10 +86,10 @@ func (c *Client) Do(method string, url string, userParams map[string]string) (*C
 		return nil, err
 	}
 
-	return NewConnection(consumer, resp)
+	return newConnection(consumer, resp)
 }
 
-func NewConnection(consumer *oauth.Consumer, resp *http.Response) (*Connection, error) {
+func newConnection(consumer *oauth.Consumer, resp *http.Response) (*Connection, error) {
 	var reader io.Reader = resp.Body
 	var err error
 

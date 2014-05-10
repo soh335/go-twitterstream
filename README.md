@@ -12,13 +12,13 @@ import (
 )
 
 func main() {
-	client := twitterstream.NewClient(
-		consumerKey,
-		consumerSecret,
-		token,
-		tokenSecret,
-	)
-	client.GzipCompression = true
+	client := &twitterstream.Client{
+		ConsumerKey:     consumerKey,
+		ConsumerSecret:  consumerSecret,
+		Token:           token,
+		TokenSecret:     tokenSecret,
+		GzipCompression: true,
+	}
 
 	conn, err := client.Userstream("POST", map[string]string{"stringify_friend_ids": "true"})
 
