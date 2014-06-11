@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"errors"
-	"github.com/mreiferson/go-httpclient"
 	"github.com/mrjones/oauth"
 	"io"
 	"net/http"
@@ -53,7 +52,7 @@ func (c *Client) Do(method string, url string, userParams map[string]string) (*C
 		oauth.ServiceProvider{},
 	)
 
-	transport := &httpclient.Transport{}
+	transport := &http.Transport{}
 
 	client := &http.Client{Transport: transport}
 	consumer.HttpClient = client
@@ -129,5 +128,5 @@ func (c *Connection) Close() error {
 }
 
 func (c *Connection) Stop() {
-	c.consumer.HttpClient.(*http.Client).Transport.(*httpclient.Transport).CancelRequest(c.response.Request)
+	c.consumer.HttpClient.(*http.Client).Transport.(*http.Transport).CancelRequest(c.response.Request)
 }
